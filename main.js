@@ -4,7 +4,8 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-
+let errorModel = document.getElementById("modal")
+errorModel.classList.add("hidden")
 
 
 //------------------------------------------------------------------------------
