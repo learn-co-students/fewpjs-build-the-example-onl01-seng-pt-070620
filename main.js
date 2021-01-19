@@ -4,40 +4,39 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-let errorModel = document.getElementById("modal")
-errorModel.classList.add("hidden")
+let errorModal = document.getElementById("modal")
+errorModal.classList.add("hidden")
 
 let heart = document.querySelector("span.like-glyph")
-heart.addEventListener('click', mimicServerCall)
+heart.addEventListener('click', renderPosts)
 
-async function mimicServerCall() {
-  return fetch("http://localhost:3000/posts")
-  .then(response => response.json())
-  .then(function(results) {
-    console.log(results)
-    renderResults(results)
-  })
-  .catch(error) {
-    alert(error.message)
+async function renderPosts() {
+  let randomSuccess = Math.floor(Math.random() * Math.floor(500))
+  if (randomSuccess < 200) {
+    heart.classList.remove("span.like-glyph")
+    let fullHeart = document.createElement("span.activated-heart")
+    fullHeart.innerText = FULL_HEART
+    heart.append(fullHeart)
+    if (fullHeart.innerText = FULL_HEART) {
+      heart.classList.remove("span.activated-heart")
+      let emptyHeart = document.createElement("span.like-glyph")
+      emptyHeart.innerHTML = EMPTY_HEART
+      heart.append(emptyHeart)
+    }
+  } else {
+    return fetch("http://localhost:3000/posts")
+    .then(response => response.json())
+    .then(posts => console.log(posts))
+    .catch((error) => {
+      setTimeout(function() {
+        errorModal.classList.remove("hidden")
+        let errorMsg = error.message
+        errorModal.innerText = errorMsg
+      }, 3000)
+    })
   }
+
 }
-
-function renderResults(results) {
-  method: "POST",
-  headers: {
-    "content-type": "application/json",
-    Accept: "application/json",
-  },
-  
-  body: JSON.stringify({
-    "id": id,
-    "title": title,
-    "author": author
-  }
-  )
-}
-
-
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
