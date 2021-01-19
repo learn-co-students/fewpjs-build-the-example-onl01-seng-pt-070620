@@ -7,6 +7,37 @@ const FULL_HEART = '♥'
 let errorModel = document.getElementById("modal")
 errorModel.classList.add("hidden")
 
+let heart = document.querySelector("span.like-glyph")
+heart.addEventListener('click', mimicServerCall)
+
+async function mimicServerCall() {
+  return fetch("http://localhost:3000/posts")
+  .then(response => response.json())
+  .then(function(results) {
+    console.log(results)
+    renderResults(results)
+  })
+  .catch(error) {
+    alert(error.message)
+  }
+}
+
+function renderResults(results) {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+    Accept: "application/json",
+  },
+  
+  body: JSON.stringify({
+    "id": id,
+    "title": title,
+    "author": author
+  }
+  )
+}
+
+
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
