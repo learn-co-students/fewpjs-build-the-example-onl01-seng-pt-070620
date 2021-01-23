@@ -4,8 +4,16 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+document.addEventListener("DOMContentLoaded", () => {
+let modal = document.getElementById("modal").hidden = true
+})
+
+const like = document.querySelector('.like-glyph')
 
 
+
+like.addEventListener("click", function(){
+  like.innerHTML = FULL_HEART})
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
