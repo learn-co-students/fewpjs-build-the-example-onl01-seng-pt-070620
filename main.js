@@ -4,17 +4,33 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-document.addEventListener("DOMContentLoaded", () => {
-let modal = document.getElementById("modal").hidden = true
-})
+const like = document.querySelectorAll('.like-glyph')
 
-const like = document.querySelector('.like-glyph')
+  //Grabbing all the hearts
+  
+  function fillIn(e){
+    
+    let h = e.target
+    mimicServerCall()
+    .then (function(){
+      if(h.innerHTML == FULL_HEART){
+        h.innerHTML = EMPTY_HEART}
+       else {h.innerHTML = FULL_HEART} 
+    })
+    .catch(function(error){
+      let modal = document.getElementById("modal")
+      modal.setAttribute('class', 'reactivated')
+    })
+  }
 
+//function for use below, handles server call, errors and filling in heart
+//the catch change's modal class so it's no longer "hidden"
 
+  for (let heart of like){
+    heart.addEventListener("click", fillIn)
+  }
 
-like.addEventListener("click", function(){
-  like.innerHTML = FULL_HEART})
-
+  //iteration with a for...of, heart is the variable representing the individual glyph, trigger fillin function on click of each
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
 //------------------------------------------------------------------------------
