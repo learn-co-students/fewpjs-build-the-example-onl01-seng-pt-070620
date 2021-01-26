@@ -6,7 +6,9 @@ let message = document.querySelector('#modal-message');
 let hearts = document.querySelectorAll(".like")
 
 for (let heart of hearts) {
-  heart.addEventListener("click", like)
+  heart.addEventListener("click", function(e) {
+    like(e)
+  })
 }
 
 function like(e) {
@@ -14,7 +16,8 @@ function like(e) {
     mimicServerCall()
     .then(() => {
       e.target.innerText = FULL_HEART;
-      e.target.classList.toggle('activated-heart');
+      //e.target.classList.toggle('activated-heart');
+      e.target.classList.add('activated-heart')
     })
     .catch(err => {
       modal.classList.toggle('hidden');
@@ -24,7 +27,7 @@ function like(e) {
   }
   if (e.target.innerText === FULL_HEART) {
     e.target.innerText = EMPTY_HEART;
-    e.target.classList.toggle('activated-heart');
+    e.target.classList.remove('activated-heart');
   }
 }
 modal.className = "hidden"
