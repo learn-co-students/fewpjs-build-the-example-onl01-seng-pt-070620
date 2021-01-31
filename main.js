@@ -4,6 +4,24 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+//Grab all hearts & add eventlistener
+let spans = document.querySelectorAll(".like-glyph");
+for (span of spans){
+  // console.log(span);
+  span.addEventListener("click", likeCallBack);
+}
+
+
+function likeCallBack(e){
+  let heart = e.target;
+  mimicServerCall()
+    .then(function(){
+      console.log("click")
+  })
+    .catch(function(){
+      console.log("failed")
+  })
+}
 
 
 
