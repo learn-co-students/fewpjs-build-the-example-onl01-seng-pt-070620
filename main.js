@@ -3,7 +3,6 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
-
 //Grab all hearts & add eventlistener
 let spans = document.querySelectorAll(".like-glyph");
 for (span of spans){
@@ -14,12 +13,23 @@ for (span of spans){
 
 function likeCallBack(e){
   let heart = e.target;
+  let liked = Array.from(heart.classList).includes("activated-heart")
   mimicServerCall()
     .then(function(){
-      console.log("click")
+      if (liked){
+        heart.classList.remove("activated-heart");
+      } else {
+        heart.classList.add("activated-heart");
+      } 
+    
   })
-    .catch(function(){
-      console.log("failed")
+    .catch(function(error){
+    let div = document.getElementById("modal");
+    div.classList.remove("hidden");
+    div.innerHTML = error;
+    setTimeout(function(){
+      div.classList.add("hidden");
+    },5000)
   })
 }
 
